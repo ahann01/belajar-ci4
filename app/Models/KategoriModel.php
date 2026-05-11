@@ -27,4 +27,36 @@ class KategoriModel extends Model
         }
         return $result;
     }
+
+    /** 
+     * Hitung jumlah buku dalam kategori tertentu 
+     */
+    public function countBooks(int $kategoriId): int
+    {
+        $db = \Config\Database::connect();
+        return (int) $db->table('buku')
+            ->where('kategori_id', $kategoriId)
+            ->countAllResults();
+    }
+
+    /** 
+     * Ambil nama kategori berdasarkan ID 
+     */
+    public function getNamaById(int $id): string|null
+    {
+        $result = $this->select('nama')->find($id);
+        return $result ? (string) $result['nama'] : null;
+    }
+
+    /** 
+     * Cek apakah nama kategori sudah ada (untuk validasi unik) 
+     */
+    public function isNamaExists(string $nama, int $excludeId = 0): bool
+    {
+        $qb = $this->where('nama', $nama);
+        if ($excludeId > 0) {
+            $qb->where('id !=', $excludeId);
+        }
+        return $qb->countAllResults() > 0;
+    }
 }
