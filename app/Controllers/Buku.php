@@ -193,4 +193,24 @@ dihapus.");
             ->setHeader('Content-Disposition', 'attachment; filename="' . $fileName . '"')
             ->setBody($csvData);
     }
+
+    // ────────────────────────────────────── 
+    // STATISTIK BUKU
+    // ────────────────────────────────────── 
+    public function statistik(): string
+    {
+        $statistik = $this->bukuModel->getStatistik();
+        $rata_rata = $statistik['total'] > 0 ? round($statistik['total_stok'] / $statistik['total'], 2) : 0;
+        
+        $topStok = $this->bukuModel->orderBy('stok', 'DESC')->limit(5)->findAll();
+        $stokHabis = $this->bukuModel->where('stok', 0)->findAll();
+
+        return view('buku/statistik', [
+            'title'     => 'Statistik Buku',
+            'statistik' => $statistik,
+            'rata_rata' => $rata_rata,
+            'topStok'   => $topStok,
+            'stokHabis' => $stokHabis
+        ]);
+    }
 }

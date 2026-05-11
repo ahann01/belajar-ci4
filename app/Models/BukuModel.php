@@ -94,7 +94,7 @@ class BukuModel extends Model
             'total_stok'     => (int)
             $db->table('buku')->selectSum('stok')->get()->getRow()->stok,
             'per_kategori'   => $db->table('buku')
-                ->select('kategori.nama, COUNT(buku.id) AS jumlah')
+                ->select('kategori.nama, COUNT(buku.id) AS jumlah, SUM(buku.stok) AS total_stok')
                 ->join('kategori', 'kategori.id = buku.kategori_id', 'left')
                 ->groupBy('buku.kategori_id')
                 ->orderBy('jumlah', 'DESC')
