@@ -156,4 +156,41 @@ dihapus.");
             'kategori_id' => $this->request->getPost('kategori_id') ?: null,
         ];
     }
+
+    // ────────────────────────────────────── 
+    // EKSPOR CSV
+    // ────────────────────────────────────── 
+    public function ekspor()
+    {
+        $buku = $this->bukuModel->getBukuDenganKategori();
+        $tanggal = date('Y-m-d');
+        $fileName = "buku-export-{$tanggal}.csv";
+
+        $output = fopen('php://memory', 'w');
+        
+        fputcsv($output, ['No', 'Kode', 'Judul', 'Penulis', 'Penerbit', 'Tahun', 'Stok', 'Kategori']);
+
+        $no = 1;
+        foreach ($buku as $row) {
+            fputcsv($output, [
+                $no++,
+                $row['kode_buku'],
+                $row['judul'],
+                $row['penulis'],
+                $row['penerbit'],
+                $row['tahun'],
+                $row['stok'],
+                $row['nama_kategori'] ?? '-'
+            ]);
+        }
+
+        rewind($output);
+        $csvData = stream_get_contents($output);
+        fclose($output);
+
+        return $this->response
+            ->setContentType('text/csv')
+            ->setHeader('Content-Disposition', 'attachment; filename="' . $fileName . '"')
+            ->setBody($csvData);
+    }
 }
