@@ -96,6 +96,13 @@
                                         <i class="bi bi-key"></i> Ganti Password
                                     </a>
                                 </li>
+                                <?php if (session()->get('role') === 'admin'): ?>
+                                    <li>
+                                        <a class="dropdown-item" href="<?= base_url('admin/pengguna') ?>">
+                                            <i class="bi bi-people"></i> Manajemen Pengguna
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
