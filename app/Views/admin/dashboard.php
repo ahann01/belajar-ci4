@@ -17,7 +17,7 @@
 
 <div class='d-flex justify-content-between align-items-center mb-4'>
     <h2><i class='bi bi-speedometer2'></i> Dashboard Admin</h2>
-    <span class='text-muted'>Halo, <?= esc(session()->get('nama')) ?>!</span>
+    <span class='text-muted'>Halo, <?= esc((string) session()->get('nama')) ?>!</span>
 </div>
 
 <!-- Kartu Statistik -->

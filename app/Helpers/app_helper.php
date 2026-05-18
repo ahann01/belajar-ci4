@@ -27,7 +27,7 @@ if (!function_exists('format_tanggal')) {
 }
 
 if (!function_exists('format_rupiah')) {
-    function format_rupiah($nominal): string
+    function format_rupiah(float $nominal): string
     {
         return 'Rp ' . number_format($nominal, 0, ',', '.');
     }
@@ -58,26 +58,26 @@ if (!function_exists('status_badge')) {
         $warna = $map[strtolower($status)] ?? 'secondary';
 
         return "<span class='badge bg-{$warna}'>" . ucfirst($status) . "</span>";
+    }
+}
 
-        if (!function_exists('inisial_nama')) {
-            function inisial_nama($namaLengkap)
-            {
-                $kata = explode(' ', $namaLengkap);
-                $hasil = '';
+if (!function_exists('inisial_nama')) {
+    function inisial_nama(string $namaLengkap): string
+    {
+        $kata = explode(' ', $namaLengkap);
+        $hasil = '';
 
-                foreach ($kata as $k) {
-                    $hasil .= strtoupper(substr($k, 0, 1));
-                }
-
-                return $hasil;
-            }
+        foreach ($kata as $k) {
+            $hasil .= strtoupper(substr($k, 0, 1));
         }
 
-        if (!function_exists('avatar_url')) {
-            function avatar_url($nama)
-            {
-                return 'https://ui-avatars.com/api/?name=' . urlencode($nama);
-            }
-        }
+        return $hasil;
+    }
+}
+
+if (!function_exists('avatar_url')) {
+    function avatar_url(string $nama): string
+    {
+        return 'https://ui-avatars.com/api/?name=' . urlencode($nama);
     }
 }

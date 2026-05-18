@@ -14,7 +14,7 @@
                 <?php if (!empty($errors)): ?>
                     <div class='alert alert-danger py-2'>
                         <?php foreach ($errors as $e): ?>
-                            <div><i class='bi bi-x-circle'></i> <?= esc($e) ?></div>
+                            <div><i class='bi bi-x-circle'></i> <?= esc((string) $e) ?></div>
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>

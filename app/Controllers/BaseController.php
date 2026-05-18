@@ -11,6 +11,15 @@ use Psr\Log\LoggerInterface;
 
 abstract class BaseController extends Controller
 {
+    /**
+     * An array of helpers to be loaded automatically upon
+     * class instantiation. These helpers will be available
+     * to all other controllers that extend BaseController.
+     *
+     * @var list<string>
+     */
+    protected $helpers = ['app'];
+
     public function initController(
         RequestInterface $request,
         ResponseInterface $response,

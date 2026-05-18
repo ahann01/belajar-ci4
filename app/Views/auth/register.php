@@ -15,7 +15,7 @@
                     <div class='alert alert-danger'>
                         <ul class='mb-0 ps-3'>
                             <?php foreach ($errors as $e): ?>
-                                <li><?= esc($e) ?></li>
+                                <li><?= esc((string) $e) ?></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>

@@ -9,15 +9,19 @@
             </div>
             <div class='card-body p-4'>
 
-                <?php $errors = session()->getFlashdata('errors') ?? []; ?>
-                <?php if (session()->getFlashdata('error')): ?>
-                    <?php $errors[] = session()->getFlashdata('error'); ?>
-                <?php endif; ?>
-                
+                <?php
+                $sessionErrors = session()->getFlashdata('errors');
+                $errors = is_array($sessionErrors) ? $sessionErrors : [];
+                $singleError = session()->getFlashdata('error');
+                if (is_string($singleError)) {
+                    $errors[] = $singleError;
+                }
+                ?>
+
                 <?php if (!empty($errors)): ?>
                     <div class='alert alert-danger py-2'>
                         <?php foreach ($errors as $e): ?>
-                            <div><i class='bi bi-x-circle'></i> <?= esc((string) $e) ?></div>
+                            <div><i class='bi bi-x-circle'></i> <?= esc($e) ?></div>
                         <?php endforeach; ?>
                     </div>
                 <?php endif; ?>
@@ -52,7 +56,7 @@
                     <button type='submit' class='btn btn-primary w-100 py-2'>
                         <i class='bi bi-save'></i> Simpan Password
                     </button>
-                    
+
                     <a href="<?= base_url('/') ?>" class="btn btn-secondary w-100 mt-2">Batal</a>
                 </form>
             </div>

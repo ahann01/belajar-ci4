@@ -88,7 +88,7 @@
 
                         <div class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-person-circle"></i> <?= esc(session()->get('nama')) ?>
+                                <i class="bi bi-person-circle"></i> <?= esc(is_string(session()->get('nama')) ? session()->get('nama') : '') ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <li>
@@ -96,7 +96,9 @@
                                         <i class="bi bi-key"></i> Ganti Password
                                     </a>
                                 </li>
-                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
                                 <li>
                                     <a class="dropdown-item text-danger" href="<?= base_url('logout') ?>">
                                         <i class="bi bi-box-arrow-right"></i> Logout
@@ -125,14 +127,14 @@
 
         <?php if (session()->getFlashdata('sukses')): ?>
             <div class="alert alert-success alert-dismissible fade show">
-                <?= esc(session()->getFlashdata('sukses')) ?>
+                <?= esc(is_string(session()->getFlashdata('sukses')) ? session()->getFlashdata('sukses') : '') ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         <?php endif; ?>
 
         <?php if (session()->getFlashdata('error')): ?>
             <div class="alert alert-danger alert-dismissible fade show">
-                <?= esc(session()->getFlashdata('error')) ?>
+                <?= esc(is_string(session()->getFlashdata('error')) ? session()->getFlashdata('error') : '') ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
             </div>
         <?php endif; ?>

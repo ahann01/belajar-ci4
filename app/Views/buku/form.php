@@ -18,7 +18,7 @@ $errors = session()->getFlashdata('errors') ?? [];
     <div class='col-md-9'>
         <div class='card shadow-sm'>
             <div class='card-header bg-primary text-white'>
-                <h4 class='mb-0'><?= esc($title) ?></h4>
+                <h4 class='mb-0'><?= esc((string) $title) ?></h4>
             </div>
             <div class='card-body p-4'>
 
@@ -31,7 +31,7 @@ $errors = session()->getFlashdata('errors') ?? [];
                         </h6>
                         <ul class='mb-0 ps-3'>
                             <?php foreach ($errors as $field => $msg): ?>
-                                <li><?= esc($msg) ?></li>
+                                <li><?= esc((string) $msg) ?></li>
                             <?php endforeach; ?>
                         </ul>
                     </div>
