@@ -86,15 +86,24 @@
 
                     <?php if (session()->get('logged_in')): ?>
 
-                        <span class="navbar-text me-3 text-light">
-                            <i class="bi bi-person-circle"></i>
-                            <?= esc(session()->get('nama')) ?>
-                        </span>
-
-                        <a class="btn btn-outline-light btn-sm"
-                            href="<?= base_url('logout') ?>">
-                            <i class="bi bi-box-arrow-right"></i> Logout
-                        </a>
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i> <?= esc(session()->get('nama')) ?>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <li>
+                                    <a class="dropdown-item" href="<?= base_url('akun/ganti-password') ?>">
+                                        <i class="bi bi-key"></i> Ganti Password
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item text-danger" href="<?= base_url('logout') ?>">
+                                        <i class="bi bi-box-arrow-right"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
 
                     <?php else: ?>
 
